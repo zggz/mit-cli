@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'path'
 
 import config from '../config/index.js'
 
@@ -8,14 +8,14 @@ export default {
     overlay: config.errorOverlay
       ? { warnings: false, errors: true }
       : false,
-    progress: true,
+    progress: true
   },
   compress: true,
   allowedHosts: config.allowedHosts.length > 1 ? config.allowedHosts : 'all',
   historyApiFallback: {
     rewrites: [
-      { from: /.*/, to: path.posix.join(config.assetsPublicPath, 'index.html') },
-    ],
+      { from: /.*/, to: path.posix.join(config.assetsPublicPath, 'index.html') }
+    ]
   },
   host: config.host,
   port: config.port,
@@ -23,10 +23,10 @@ export default {
   proxy: config.proxyTable || {},
   onListening: function (devServer) {
     if (!devServer) {
-      throw new Error('webpack-dev-server is not defined');
+      throw new Error('webpack-dev-server is not defined')
     }
 
-    const port = devServer.server.address().port;
-    console.log('Listening on port:', port);
-  },
+    const port = devServer.server.address().port
+    console.log('Listening on port:', port)
+  }
 }
