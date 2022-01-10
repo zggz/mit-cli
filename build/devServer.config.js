@@ -4,7 +4,7 @@ import config from '../config/index.js'
 
 export default {
   client: {
-    logging: 'info',
+    logging: 'none',
     overlay: config.errorOverlay
       ? { warnings: false, errors: true }
       : false,
