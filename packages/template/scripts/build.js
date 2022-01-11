@@ -1,12 +1,12 @@
 'use strict'
 
 import webpack from 'webpack'
-import webpackConfig from '../build/webpack.config.js'
+import webpackProdConfig from '../build/webpack.prod.config.js'
 
 process.env.BABEL_ENV = 'production'
 process.env.NODE_ENV = 'production'
 
-webpack(webpackConfig, (err, stats) => {
+webpack(webpackProdConfig, (err, stats) => {
   // spinner.stop()
   if (err) throw err
   process.stdout.write(

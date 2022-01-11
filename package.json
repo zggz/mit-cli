@@ -9,18 +9,20 @@
   "scripts": {
     "build": "cd packages/template &&  node scripts/build.js",
     "start": "cd packages/template && node scripts/start.js",
+    "debug":"cd packages/template && node $NODE_DEBUG_OPTION scripts/start.js",
     "preinstall": "npx only-allow pnpm",
     "lint": "eslint packages/*/{src,types}/**",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "MIT",
-  "devDependencies": {
-  },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not op_mini all"
   ],
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "@ts/eslint-config": "workspace:^1.0.0"
+  }
 }
