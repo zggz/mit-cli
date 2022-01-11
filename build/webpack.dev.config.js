@@ -1,11 +1,15 @@
 
 import path from 'path'
+import address from 'address'
 import { merge } from 'webpack-merge'
 import portFinder from 'portfinder'
 import FriendlyErrorsWebpackPlugin from '@soda/friendly-errors-webpack-plugin'
+import pico from 'picocolors'
 
 import webpackConfig from './webpack.config.js'
 import config from '../config/index.js'
+
+const { green } = pico
 
 const devWebpackConfig = merge(webpackConfig, {
   devServer: {
@@ -50,10 +54,16 @@ export default new Promise((resolve, reject) => {
       devWebpackConfig.devServer.port = port
 
       // Add FriendlyErrorsPlugin
+      const message = ['Your application is running here:', '', green(`http://${devWebpackConfig.devServer.host}:${port}`)]
+      if (devWebpackConfig.devServer.host === '0.0.0.0') {
+        message.push(green(`http://${address.ip()}:${port}`))
+      }
       devWebpackConfig.plugins.push(new FriendlyErrorsWebpackPlugin({
         compilationSuccessInfo: {
-          messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`]
+          messages: message,
+          notes: ['Some additional notes to be displayed upon successful compilation']
         },
+        clearConsole: true,
         onErrors: undefined
       }))
 

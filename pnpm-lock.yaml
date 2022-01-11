@@ -4,6 +4,7 @@ specifiers:
   '@soda/friendly-errors-webpack-plugin': ^1.8.1
   '@typescript-eslint/eslint-plugin': ^5.9.0
   '@typescript-eslint/parser': ^5.9.0
+  address: ^1.1.2
   autoprefixer: ^10.4.2
   eslint: ^8.6.0
   eslint-config-standard: ^16.0.3
@@ -16,6 +17,7 @@ specifiers:
   html-webpack-plugin: ^5.5.0
   lodash: ^4.17.21
   path: ^0.12.7
+  picocolors: ^1.0.0
   portfinder: ^1.0.28
   postcss: ^8.4.5
   typescript: ^4.5.4
@@ -28,6 +30,7 @@ devDependencies:
   '@soda/friendly-errors-webpack-plugin': 1.8.1_webpack@5.65.0
   '@typescript-eslint/eslint-plugin': 5.9.0_bd2fd93dbcc607ad2f21b784bccfe0c8
   '@typescript-eslint/parser': 5.9.0_eslint@8.6.0+typescript@4.5.4
+  address: 1.1.2
   autoprefixer: 10.4.2_postcss@8.4.5
   eslint: 8.6.0
   eslint-config-standard: 16.0.3_8d3cc733693a55bff97313a767012510
@@ -40,6 +43,7 @@ devDependencies:
   html-webpack-plugin: 5.5.0_webpack@5.65.0
   lodash: 4.17.21
   path: 0.12.7
+  picocolors: 1.0.0
   portfinder: 1.0.28
   postcss: 8.4.5
   typescript: 4.5.4
@@ -552,6 +556,11 @@ packages:
     resolution: {integrity: sha512-V/LGr1APy+PXIwKebEWrkZPwoeoF+w1jiOBUmuxuiUIaOHtob8Qc9BTrYo7VuI5fR8tqsy+buA2WFooR5olqvQ==}
     engines: {node: '>=0.4.0'}
     hasBin: true
+    dev: true
+
+  /address/1.1.2:
+    resolution: {integrity: sha512-aT6camzM4xEA54YVJYSqxz1kv4IHnQZRtThJJHhUMRExaU5spC7jX5ugSwTaTgJliIgs4VhZOk7htClvQ/LmRA==}
+    engines: {node: '>= 0.12.0'}
     dev: true
 
   /aggregate-error/3.1.0:
