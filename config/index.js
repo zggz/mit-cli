@@ -16,7 +16,7 @@ export default {
   assetsPublicPath: '/',
   // dev server
   host: 'localhost',
-  port: 3000,
+  port: 3300,
   autoOpenBrowser: true,
   allowedHosts: [],
   poll: false,
