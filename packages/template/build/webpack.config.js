@@ -5,6 +5,7 @@ import config from '../config/index.js'
 import * as utils from './utils.js'
 
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import ESLintPlugin from 'eslint-webpack-plugin'
 // import webpack from 'webpack'
 
@@ -72,7 +73,22 @@ export default {
       template: 'index.html',
       inject: true
     }),
-
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css'
+    }),
     new ESLintPlugin()
   ]
+  // node: {
+  //   // prevent webpack from injecting useless setImmediate polyfill because Vue
+  //   // source contains it (although only uses it if it's native).
+  //   setImmediate: false,
+  //   // prevent webpack from injecting mocks to Node native modules
+  //   // that does not make sense for the client
+  //   dgram: 'empty',
+  //   fs: 'empty',
+  //   net: 'empty',
+  //   tls: 'empty',
+  //   child_process: 'empty'
+  // }
 }

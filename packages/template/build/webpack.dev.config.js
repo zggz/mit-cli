@@ -8,10 +8,13 @@ import pico from 'picocolors'
 
 import webpackConfig from './webpack.config.js'
 import config from '../config/index.js'
+import * as utils from './utils.js'
 
 const { green } = pico
-
 const devWebpackConfig = merge(webpackConfig, {
+  module: {
+    rules: utils.styleLoaders({ sourceMap: true, usePostCSS: true })
+  },
   devServer: {
     client: {
       logging: 'none',

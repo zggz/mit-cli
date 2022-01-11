@@ -40,6 +40,12 @@
     "@babel/core": "^7.16.7",
     "@ts/eslint-config": "workspace:^1.0.0",
     "babel-loader": "^8.2.3",
+    "css-loader": "^6.5.1",
+    "mini-css-extract-plugin": "^2.4.6",
+    "postcss-loader": "^6.2.1",
+    "sass": "^1.47.0",
+    "sass-loader": "^12.4.0",
+    "style-loader": "^3.3.1",
     "webpack-merge": "^5.8.0"
   }
 }

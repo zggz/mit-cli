@@ -1,6 +1,11 @@
 'use strict'
 import path from 'path'
+
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+
 import config from '../config/index.js'
+
+const isEnvDevelopment = process.env.NODE_ENV === 'development'
 
 export const assetsPath = function (_path) {
   const assetsSubDirectory = process.env.NODE_ENV === 'production'
@@ -39,6 +44,9 @@ export const cssLoaders = function (options) {
         })
       })
     }
+    //  style-loader，因为它可以使用多个 标签将 CSS 插入到 DOM 中，并且反应会更快
+    loaders.unshift(isEnvDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader)
+    return loaders
   }
 
   // https://vue-loader.vuejs.org/en/configurations/extract-css.html
@@ -56,8 +64,7 @@ export const cssLoaders = function (options) {
 // Generate loaders for standalone style files (outside of .vue)
 export const styleLoaders = function (options) {
   const output = []
-  const loaders = exports.cssLoaders(options)
-
+  const loaders = cssLoaders(options)
   for (const extension in loaders) {
     const loader = loaders[extension]
     output.push({
