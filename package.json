@@ -7,9 +7,9 @@
     "sum": "./lib/index.js"
   },
   "scripts": {
-    "build": "cd packages/template &&  node scripts/build.js",
-    "start": "cd packages/template && node scripts/start.js",
-    "debug":"cd packages/template && node $NODE_DEBUG_OPTION scripts/start.js",
+    "build": "cd packages/create-cli &&  node scripts/build.js",
+    "start": "cd packages/create-cli && node scripts/start.js",
+    "debug":"cd packages/create-cli && node $NODE_DEBUG_OPTION scripts/start.js",
     "preinstall": "npx only-allow pnpm",
     "lint": "eslint packages/*/{src,types}/**",
     "test": "echo \"Error: no test specified\" && exit 1"
