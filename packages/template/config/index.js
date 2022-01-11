@@ -14,6 +14,7 @@ export default {
   assetsRoot: path.resolve(__dirname, '../dist'),
   // 静态资源的 基础路径
   assetsPublicPath: '/',
+  assetsSubDirectory:'static',
   // dev server
   host: 'localhost',
   port: 3300,

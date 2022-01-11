@@ -2,7 +2,7 @@ import path from 'path'
 
 import config from '../config/index.js'
 
-// import { __dirname } from './utils/index.js'
+import * as utils from './utils.js'
 
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import ESLintPlugin from 'eslint-webpack-plugin'
@@ -35,12 +35,6 @@ export default {
   stats: 'errors-only',
   module: {
     rules: [
-      ...(config.dev.useEslint ? [createLintingRule()] : []),
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: vueLoaderConfig
-      },
       {
         test: /\.js$/,
         loader: 'babel-loader',
