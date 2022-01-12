@@ -1,4 +1,4 @@
-'use strict'
+
 import path from 'path'
 
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
@@ -28,6 +28,27 @@ export const cssLoaders = function (options) {
   const postcssLoader = {
     loader: 'postcss-loader',
     options: {
+      postcssOptions: {
+        // Necessary for external CSS imports to work
+        // https://github.com/facebook/create-react-app/issues/2677
+        ident: 'postcss',
+        config: false,
+        plugins: [
+          'postcss-flexbugs-fixes',
+          [
+            'postcss-preset-env',
+            {
+              autoprefixer: {
+                grid: 'autoplace'
+              }
+            }
+          ],
+          // Adds PostCSS Normalize as the reset css with default options,
+          // so that it honors browserslist config in package.json
+          // which in turn let's users customize the target behavior as per their needs.
+          'postcss-normalize'
+        ]
+      },
       sourceMap: options.sourceMap
     }
   }
@@ -46,6 +67,8 @@ export const cssLoaders = function (options) {
     }
     //  style-loader，因为它可以使用多个 标签将 CSS 插入到 DOM 中，并且反应会更快
     loaders.unshift(isEnvDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader)
+    console.log(loaders)
+    console.log('===')
     return loaders
   }
 

@@ -14,6 +14,7 @@ import * as utils from './utils.js'
 
 const { green } = pico
 const devWebpackConfig = merge(webpackConfig, {
+  mode: 'development',
   module: {
     rules: utils.styleLoaders({ sourceMap: true, usePostCSS: true })
   },
@@ -32,6 +33,13 @@ const devWebpackConfig = merge(webpackConfig, {
         { from: /.*/, to: path.posix.join(config.assetsPublicPath, 'index.html') }
       ]
     },
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': '*',
+      'Access-Control-Allow-Headers': '*'
+    },
+    // Enable gzip compression of generated files.
+    hot: true,
     host: config.host,
     port: config.port,
     open: config.autoOpenBrowser,
@@ -50,7 +58,7 @@ const devWebpackConfig = merge(webpackConfig, {
       chunkFilename: '[id].css'
     }),
     new ReactRefreshWebpackPlugin({
-      overlay: true
+      overlay: false
     })
   ]
 })

@@ -23,6 +23,24 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.foo { flex: 1 0 calc(1vw - 1px); }
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  grid-gap: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+}
+
+.grid::before {
+  content: 'before';
+}
+
+.grid::after {
+  content: 'after';
+}
 
 .App-link {
   color: #61dafb;

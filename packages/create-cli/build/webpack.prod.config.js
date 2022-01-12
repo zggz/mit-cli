@@ -11,6 +11,7 @@ import * as utils from './utils.js'
 import config from '../config/index.js'
 
 const prodWebpackConfig = merge(webpackConfig, {
+  mode: 'production',
   module: {
     rules: utils.styleLoaders({
       sourceMap: false,

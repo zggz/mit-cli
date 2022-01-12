@@ -6,7 +6,7 @@ import * as utils from './utils.js'
 
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import ESLintPlugin from 'eslint-webpack-plugin'
-// import webpack from 'webpack'
+import webpack from 'webpack'
 
 const isEnvDevelopment = process.env.NODE_ENV === 'development'
 const isEnvProduction = process.env.NODE_ENV === 'production'
@@ -17,7 +17,6 @@ function resolve (dir) {
 
 const webpackConfig = {
   context: config.appPath,
-  mode: isEnvProduction ? 'production' : 'development',
   target: isEnvDevelopment ? 'web' : 'browserslist',
   entry: config.entryPath,
   output: {
@@ -42,7 +41,29 @@ const webpackConfig = {
         test: /\.(js|mjs|jsx|ts|tsx)$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
-        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')],
+        options: {
+          // customize: 'babel-preset-react-app/webpack-overrides',
+          // @remove-on-eject-begin
+          babelrc: false,
+          configFile: false,
+          presets: [
+            [
+              'babel-preset-react-app',
+              {
+                runtime: 'automatic'
+              }
+            ]
+          ],
+          plugins: [
+            isEnvDevelopment &&
+              'react-refresh/babel'
+          ].filter(Boolean),
+          cacheDirectory: true,
+          // See #6846 for context on why cacheCompression is disabled
+          cacheCompression: false,
+          compact: isEnvProduction
+        }
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -71,6 +92,7 @@ const webpackConfig = {
     ]
   },
   plugins: [
+    new webpack.ProgressPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.html',

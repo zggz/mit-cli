@@ -8,7 +8,7 @@
       {
         "runtime": "automatic"
       }
-    ]
-  ],
-  "plugins": ["react-refresh/babel"]
+    ],
+    "@babel/plugin-syntax-jsx"
+  ]
 }
