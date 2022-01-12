@@ -6,6 +6,7 @@ import portFinder from 'portfinder'
 import FriendlyErrorsWebpackPlugin from '@soda/friendly-errors-webpack-plugin'
 import pico from 'picocolors'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin'
 
 import webpackConfig from './webpack.config.js'
 import config from '../config/index.js'
@@ -39,15 +40,17 @@ const devWebpackConfig = merge(webpackConfig, {
       if (!devServer) {
         throw new Error('webpack-dev-server is not defined')
       }
-
       const port = devServer.server.address().port
       console.log('Listening on port:', port)
     }
   },
-  plugin: [
+  plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css'
+    }),
+    new ReactRefreshWebpackPlugin({
+      overlay: true
     })
   ]
 })

@@ -12,11 +12,11 @@ const isEnvDevelopment = process.env.NODE_ENV === 'development'
 const isEnvProduction = process.env.NODE_ENV === 'production'
 
 function resolve (dir) {
-  return path.join(config.contextPath, dir)
+  return path.join(config.appPath, dir)
 }
 
-export default {
-  context: config.contextPath,
+const webpackConfig = {
+  context: config.appPath,
   mode: isEnvProduction ? 'production' : 'development',
   target: isEnvDevelopment ? 'web' : 'browserslist',
   entry: config.entryPath,
@@ -27,7 +27,7 @@ export default {
     clean: true
   },
   resolve: {
-    extensions: ['.js', '.ts', 'tsx', '.jsx', '.json'],
+    extensions: ['.js', '.ts', '.tsx', '.jsx', '.json'],
     alias: {
       '@': resolve('src')
     }
@@ -39,7 +39,7 @@ export default {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|mjs|jsx|ts|tsx)$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
         include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
@@ -76,8 +76,15 @@ export default {
       template: 'index.html',
       inject: true
     }),
-
-    new ESLintPlugin()
+    new ESLintPlugin({
+      // Plugin options
+      extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
+      // failOnError: isEnvDevelopment,
+      context: config.appSrc,
+      cache: true,
+      // ESLint class options
+      cwd: config.appPath
+    })
   ]
   // node: {
   //   // prevent webpack from injecting useless setImmediate polyfill because Vue
@@ -92,3 +99,4 @@ export default {
   //   child_process: 'empty'
   // }
 }
+export default webpackConfig

@@ -9,9 +9,9 @@ export default {
   // src 目录
   srcPath: path.resolve(__dirname, '../src'),
   // 项目根目录
-  contextPath: path.resolve(__dirname, '../'),
+  appPath: path.resolve(__dirname, '../'),
   // 入口文件
-  entryPath: path.resolve(__dirname, '../src/index.js'),
+  entryPath: path.resolve(__dirname, '../src/index.tsx'),
   // 输出目录
   assetsRoot: path.resolve(__dirname, '../dist'),
   // 静态资源的 基础路径
