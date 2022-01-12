@@ -6,6 +6,8 @@ export const __filename = fileURLToPath(import.meta.url)
 export const __dirname = dirname(__filename)
 
 export default {
+  // src 目录
+  srcPath: path.resolve(__dirname, '../src'),
   // 项目根目录
   contextPath: path.resolve(__dirname, '../'),
   // 入口文件

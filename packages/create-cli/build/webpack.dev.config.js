@@ -5,6 +5,7 @@ import { merge } from 'webpack-merge'
 import portFinder from 'portfinder'
 import FriendlyErrorsWebpackPlugin from '@soda/friendly-errors-webpack-plugin'
 import pico from 'picocolors'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 
 import webpackConfig from './webpack.config.js'
 import config from '../config/index.js'
@@ -42,7 +43,13 @@ const devWebpackConfig = merge(webpackConfig, {
       const port = devServer.server.address().port
       console.log('Listening on port:', port)
     }
-  }
+  },
+  plugin: [
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css'
+    })
+  ]
 })
 
 export default new Promise((resolve, reject) => {
