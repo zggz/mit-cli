@@ -1,6 +1,6 @@
 {
   "name": "mit-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "./lib/index.js",
   "bin": {
@@ -9,7 +9,7 @@
   "scripts": {
     "build": "cd packages/create-cli &&  node scripts/build.js",
     "start": "cd packages/create-cli && node scripts/start.js",
-    "debug":"cd packages/create-cli && node $NODE_DEBUG_OPTION scripts/start.js",
+    "debug": "cd packages/create-cli && node $NODE_DEBUG_OPTION scripts/start.js",
     "preinstall": "npx only-allow pnpm",
     "lint": "eslint packages/*/{src,types}/**",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -24,5 +24,9 @@
   "type": "module",
   "dependencies": {
     "@ts/eslint-config": "workspace:^1.0.0"
+  },
+  "engines": {
+    "node": ">=14",
+    "pnpm": ">=6"
   }
 }
