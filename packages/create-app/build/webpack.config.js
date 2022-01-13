@@ -7,7 +7,7 @@ import * as utils from './utils.js'
 import ESLintPlugin from 'eslint-webpack-plugin'
 // 解决osx 文件大小写的问题
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin'
-import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
+// import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 import ForkTsCheckerWebpackPlugin from 'react-dev-utils/ForkTsCheckerWarningWebpackPlugin.js'
 import eslintFormatter from 'react-dev-utils/eslintFormatter.js'
 import webpack from 'webpack'
@@ -20,8 +20,6 @@ const isEnvProduction = process.env.NODE_ENV === 'production'
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false'
 
-// eslint-disable-next-line no-debugger
-debugger
 function resolve (dir) {
   return path.join(config.appPath, dir)
 }
@@ -34,8 +32,8 @@ const webpackConfig = {
   output: {
     filename: '[name].bundle.js',
     path: config.assetsRoot,
-    publicPath: config.assetsPublicPath,
-    clean: true
+    publicPath: config.assetsPublicPath
+    // clean: true 该配置和ESLintPlugin 会导致热 eslint错误后更新失败
   },
   resolve: {
     extensions: ['.js', '.ts', '.tsx', '.jsx', '.json'],
@@ -151,12 +149,11 @@ const webpackConfig = {
   plugins: [
     new webpack.ProgressPlugin(),
     new CaseSensitivePathsPlugin(),
-    // new CssMinimizerPlugin(),
     new ESLintPlugin({
       // Plugin options
       extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
       formatter: eslintFormatter,
-      // failOnError: isEnvDevelopment,
+      failOnError: !isEnvDevelopment,
       context: config.srcPath,
       cache: true,
       cacheLocation: path.resolve(
