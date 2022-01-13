@@ -4,9 +4,12 @@ import config from '../config/index.js'
 
 import * as utils from './utils.js'
 
-import HtmlWebpackPlugin from 'html-webpack-plugin'
 import ESLintPlugin from 'eslint-webpack-plugin'
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
+// 解决osx 文件大小写的问题
+import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin'
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
+import ForkTsCheckerWebpackPlugin from 'react-dev-utils/ForkTsCheckerWarningWebpackPlugin.js'
+import eslintFormatter from 'react-dev-utils/eslintFormatter.js'
 import webpack from 'webpack'
 
 const imageInlineSizeLimit = parseInt(
@@ -25,14 +28,9 @@ function resolve (dir) {
 
 const webpackConfig = {
   context: config.appPath,
-  target: 'browserslist',
+  target: ['browserslist'],
   entry: config.entryPath,
   bail: isEnvProduction,
-  devtool: isEnvProduction
-    ? shouldUseSourceMap
-      ? 'source-map'
-      : false
-    : isEnvDevelopment && 'cheap-module-source-map',
   output: {
     filename: '[name].bundle.js',
     path: config.assetsRoot,
@@ -49,8 +47,11 @@ const webpackConfig = {
   cache: {
     type: 'filesystem' // 使用文件缓存
   },
+  infrastructureLogging: {
+    level: 'none'
+  },
   module: {
-
+    strictExportPresence: true,
     rules: [
       // Handle node_modules packages that contain sourcemaps
       shouldUseSourceMap && {
@@ -113,10 +114,6 @@ const webpackConfig = {
             }
           },
           {
-            // Exclude `js` files to keep "css" loader working as it injects
-            // its runtime that would otherwise be processed through "file" loader.
-            // Also exclude `html` and `json` extensions so they get processed
-            // by webpacks internal loaders.
             exclude: [/^$/, /\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
             type: 'asset/resource'
           },
@@ -153,14 +150,12 @@ const webpackConfig = {
   },
   plugins: [
     new webpack.ProgressPlugin(),
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'index.html',
-      inject: true
-    }),
+    new CaseSensitivePathsPlugin(),
+    // new CssMinimizerPlugin(),
     new ESLintPlugin({
       // Plugin options
       extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
+      formatter: eslintFormatter,
       // failOnError: isEnvDevelopment,
       context: config.srcPath,
       cache: true,

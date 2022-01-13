@@ -6,6 +6,8 @@ import portFinder from 'portfinder'
 import FriendlyErrorsWebpackPlugin from '@soda/friendly-errors-webpack-plugin'
 import pico from 'picocolors'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin'
 
 import webpackConfig from './webpack.config.js'
@@ -13,6 +15,10 @@ import config from '../config/index.js'
 import * as utils from './utils.js'
 
 const { green } = pico
+
+const sockHost = process.env.WDS_SOCKET_HOST
+const sockPath = process.env.WDS_SOCKET_PATH // default: '/ws'
+const sockPort = process.env.WDS_SOCKET_PORT
 
 const devWebpackConfig = merge(webpackConfig, {
   mode: 'development',
@@ -22,11 +28,18 @@ const devWebpackConfig = merge(webpackConfig, {
   },
   devServer: {
     client: {
-      logging: 'none',
-      overlay: config.errorOverlay
-        ? { warnings: false, errors: true }
-        : false,
-      progress: true
+      webSocketURL: {
+        // Enable custom sockjs pathname for websocket connection to hot reloading server.
+        // Enable custom sockjs hostname, pathname and port for websocket connection
+        // to hot reloading server.
+        hostname: sockHost,
+        pathname: sockPath,
+        port: sockPort
+      },
+      overlay: {
+        errors: true,
+        warnings: false
+      }
     },
     compress: true,
     allowedHosts: config.allowedHosts.length > 1 ? config.allowedHosts : 'all',
@@ -41,20 +54,24 @@ const devWebpackConfig = merge(webpackConfig, {
       'Access-Control-Allow-Headers': '*'
     },
     // Enable gzip compression of generated files.
-    hot: true,
     host: config.host,
     port: config.port,
     // open: config.autoOpenBrowser,
-    proxy: config.proxyTable || {},
-    onListening: function (devServer) {
-      if (!devServer) {
-        throw new Error('webpack-dev-server is not defined')
-      }
-      const port = devServer.server.address().port
-      console.log('Listening on port:', port)
-    }
+    proxy: config.proxyTable || {}
+    // onListening: function (devServer) {
+    //   if (!devServer) {
+    //     throw new Error('webpack-dev-server is not defined')
+    //   }
+    //   const port = devServer.server.address().port
+    //   console.log('Listening on port:', port)
+    // }
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'index.html',
+      inject: true
+    }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css'
