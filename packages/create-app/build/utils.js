@@ -67,8 +67,7 @@ export const cssLoaders = function (options) {
     }
     //  style-loader，因为它可以使用多个 标签将 CSS 插入到 DOM 中，并且反应会更快
     loaders.unshift(isEnvDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader)
-    console.log(loaders)
-    console.log('===')
+
     return loaders
   }
 

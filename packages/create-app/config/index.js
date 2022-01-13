@@ -23,7 +23,7 @@ const config = {
   // dev server
   host: 'localhost',
   port: 3300,
-  autoOpenBrowser: true,
+  autoOpenBrowser: false,
   allowedHosts: [],
   poll: false,
   errorOverlay: true,
