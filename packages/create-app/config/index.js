@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url'
 export const __filename = fileURLToPath(import.meta.url)
 export const __dirname = dirname(__filename)
 
-export default {
+const config = {
   // src 目录
   srcPath: path.resolve(__dirname, '../src'),
   // 项目根目录
@@ -18,6 +18,8 @@ export default {
   assetsPublicPath: '/',
   // 静态资源的目录
   assetsSubDirectory: 'static',
+  // node_modules 目录
+  appNodeModules: path.resolve(__dirname, '../node_modules'),
   // dev server
   host: 'localhost',
   port: 3300,
@@ -27,3 +29,5 @@ export default {
   errorOverlay: true,
   proxyTable: {}
 }
+
+export default config

@@ -102,7 +102,7 @@ const webpackConfig = {
       // Plugin options
       extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
       // failOnError: isEnvDevelopment,
-      context: config.appSrc,
+      context: config.appNodeModules,
       cache: true,
       // ESLint class options
       cwd: config.appPath
