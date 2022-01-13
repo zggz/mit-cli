@@ -10,6 +10,15 @@ function App () {
         <div className="grid-cell"></div>
       </div>
       2
+
+      34 35
+      15
+      16
+      17
+      18
+      19
+      20
+      21
       <button onClick={() => setCount(c => c + 1)}>add{count}</button>
       <header className="App-header">
         <img src={Logo} className="App-logo" alt="logo" />

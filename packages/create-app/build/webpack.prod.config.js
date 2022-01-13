@@ -9,9 +9,11 @@ import webpackConfig from './webpack.config.js'
 import * as utils from './utils.js'
 
 import config from '../config/index.js'
+const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false'
 
 const prodWebpackConfig = merge(webpackConfig, {
   mode: 'production',
+
   module: {
     rules: utils.styleLoaders({
       sourceMap: false,
@@ -19,12 +21,15 @@ const prodWebpackConfig = merge(webpackConfig, {
       usePostCSS: true
     })
   },
-  devtool: false,
+  devtool: shouldUseSourceMap
+    ? 'source-map'
+    : false.valueOf,
   output: {
     path: config.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js'),
-    pathinfo: false
+    pathinfo: false,
+    clean: true
   },
   optimization: {
     splitChunks: {

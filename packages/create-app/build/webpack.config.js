@@ -25,8 +25,14 @@ function resolve (dir) {
 
 const webpackConfig = {
   context: config.appPath,
-  target: isEnvDevelopment ? 'web' : 'browserslist',
+  target: 'browserslist',
   entry: config.entryPath,
+  bail: isEnvProduction,
+  devtool: isEnvProduction
+    ? shouldUseSourceMap
+      ? 'source-map'
+      : false
+    : isEnvDevelopment && 'cheap-module-source-map',
   output: {
     filename: '[name].bundle.js',
     path: config.assetsRoot,

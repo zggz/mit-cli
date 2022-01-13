@@ -11,6 +11,13 @@ import childProcess from 'child_process'
 import open from 'open'
 import spawn from 'cross-spawn'
 
+import { dirname } from 'path'
+
+import { fileURLToPath } from 'url'
+
+export const __filename = fileURLToPath(import.meta.url)
+export const __dirname = dirname(__filename)
+
 const execSync = childProcess.execSync
 
 const { red, cyan } = pico
@@ -74,7 +81,8 @@ function startBrowserProcess (browser, url, args) {
   const shouldTryOpenChromiumWithAppleScript =
     process.platform === 'darwin' &&
     (typeof browser !== 'string' || browser === OSX_CHROME)
-
+  // eslint-disable-next-line no-debugger
+  debugger
   if (shouldTryOpenChromiumWithAppleScript) {
     // Will use the first open browser found from list
     const supportedChromiumBrowsers = [
@@ -85,7 +93,8 @@ function startBrowserProcess (browser, url, args) {
       'Vivaldi',
       'Chromium'
     ]
-
+    // eslint-disable-next-line no-debugger
+    debugger
     for (const chromiumBrowser of supportedChromiumBrowsers) {
       try {
         // Try our best to reuse existing tab
