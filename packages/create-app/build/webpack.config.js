@@ -1,7 +1,7 @@
 import path from 'path'
 
 import config from '../config/index.js'
-
+import moduleConfig from './module.config.js'
 import * as utils from './utils.js'
 
 import ESLintPlugin from 'eslint-webpack-plugin'
@@ -12,17 +12,10 @@ import ForkTsCheckerWebpackPlugin from 'react-dev-utils/ForkTsCheckerWarningWebp
 import eslintFormatter from 'react-dev-utils/eslintFormatter.js'
 import webpack from 'webpack'
 
-const imageInlineSizeLimit = parseInt(
-  process.env.IMAGE_INLINE_SIZE_LIMIT || '10000'
-)
 const isEnvDevelopment = process.env.NODE_ENV === 'development'
 const isEnvProduction = process.env.NODE_ENV === 'production'
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false'
-
-function resolve (dir) {
-  return path.join(config.appPath, dir)
-}
 
 const webpackConfig = {
   context: config.appPath,
@@ -32,13 +25,14 @@ const webpackConfig = {
   output: {
     filename: '[name].bundle.js',
     path: config.assetsRoot,
-    publicPath: config.assetsPublicPath
+    publicPath: config.assetsPublicPath,
+    pathinfo: true
     // clean: true 该配置和ESLintPlugin 会导致热 eslint错误后更新失败
   },
   resolve: {
     extensions: ['.js', '.ts', '.tsx', '.jsx', '.json'],
     alias: {
-      '@': resolve('src')
+      '@': utils.resolve('src')
     }
   },
   stats: 'errors-only',
@@ -48,104 +42,7 @@ const webpackConfig = {
   infrastructureLogging: {
     level: 'none'
   },
-  module: {
-    strictExportPresence: true,
-    rules: [
-      // Handle node_modules packages that contain sourcemaps
-      shouldUseSourceMap && {
-        enforce: 'pre',
-        exclude: /@babel(?:\/|\\{1,2})runtime/,
-        test: /\.(js|mjs|jsx|ts|tsx|css)$/,
-        loader: 'source-map-loader'
-      },
-      {
-        oneOf: [
-          {
-            test: [/\.avif$/],
-            type: 'asset',
-            mimetype: 'image/avif',
-            generator: {
-              filename: utils.assetsPath('img/[name].[hash:7].[ext]')
-            },
-            parser: {
-              dataUrlCondition: {
-                maxSize: imageInlineSizeLimit
-              }
-            }
-          },
-          {
-            test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-            type: 'asset',
-            generator: {
-              filename: utils.assetsPath('img/[name].[hash:7].[ext]')
-            },
-            parser: {
-              dataUrlCondition: {
-                maxSize: imageInlineSizeLimit
-              }
-            }
-          },
-          {
-            test: /\.svg$/,
-            use: [
-              {
-                loader: '@svgr/webpack',
-                options: {
-                  prettier: false,
-                  svgo: false,
-                  svgoConfig: {
-                    plugins: [{ removeViewBox: false }]
-                  },
-                  titleProp: true,
-                  ref: true
-                }
-              },
-              {
-                loader: 'url-loader',
-                options: {
-                  name: 'static/media/[name].[hash].[ext]'
-                }
-              }
-            ],
-            issuer: {
-              and: [/\.(ts|tsx|js|jsx|md|mdx)$/]
-            }
-          },
-          {
-            exclude: [/^$/, /\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
-            type: 'asset/resource'
-          },
-          {
-            test: /\.(js|mjs|jsx|ts|tsx)$/,
-            loader: 'babel-loader',
-            exclude: /node_modules/,
-            include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')],
-            options: {
-              babelrc: false,
-              configFile: false,
-              presets: [
-                [
-                  'babel-preset-react-app',
-                  {
-                    runtime: 'automatic'
-                  }
-                ]
-              ],
-              plugins: [
-                isEnvDevelopment &&
-                'react-refresh/babel'
-              ].filter(Boolean),
-              cacheDirectory: true,
-              // See #6846 for context on why cacheCompression is disabled
-              cacheCompression: false,
-              compact: isEnvProduction
-            }
-          }
-        ]
-      }
-
-    ]
-  },
+  module: moduleConfig(),
   plugins: [
     new webpack.ProgressPlugin(),
     new CaseSensitivePathsPlugin(),

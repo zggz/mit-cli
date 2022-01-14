@@ -1,14 +1,15 @@
 {
   "presets": [
     "@babel/preset-env",
-
     "@babel/preset-react",
     [
       "babel-preset-react-app",
       {
         "runtime": "automatic"
       }
-    ],
+    ]
+  ],
+  "plugins": [
     "@babel/plugin-syntax-jsx"
   ]
 }

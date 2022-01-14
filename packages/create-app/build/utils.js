@@ -6,6 +6,8 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import config from '../config/index.js'
 
 const isEnvDevelopment = process.env.NODE_ENV === 'development'
+const isEnvProduction = process.env.NODE_ENV === 'production'
+const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false'
 
 export const assetsPath = function (_path) {
   const assetsSubDirectory = process.env.NODE_ENV === 'production'
@@ -13,6 +15,47 @@ export const assetsPath = function (_path) {
     : config.assetsSubDirectory
 
   return path.posix.join(assetsSubDirectory, _path)
+}
+
+export function resolve (dir) {
+  return path.join(config.appPath, dir)
+}
+
+function generateLoaders () {
+  const loaders = [
+    isEnvDevelopment && 'style-loader',
+    isEnvProduction && MiniCssExtractPlugin.loader,
+    {
+      loader: 'css-loader'
+    },
+    {
+      loader: 'postcss-loader',
+      options: {
+        postcssOptions: {
+          // Necessary for external CSS imports to work
+          // https://github.com/facebook/create-react-app/issues/2677
+          ident: 'postcss',
+          config: false,
+          plugins: [
+            'postcss-flexbugs-fixes',
+            [
+              'postcss-preset-env',
+              {
+                autoprefixer: {
+                  flexbox: 'no-2009'
+                },
+                stage: 3
+              }
+            ],
+            'postcss-normalize'
+          ]
+        },
+        sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment
+      }
+    }
+  ].filter(Boolean)
+
+  return loaders
 }
 
 export const cssLoaders = function (options) {

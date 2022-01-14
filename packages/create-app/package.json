@@ -48,6 +48,7 @@
   "type": "module",
   "dependencies": {
     "@babel/core": "^7.16.7",
+    "@babel/plugin-syntax-jsx": "^7.16.7",
     "@babel/preset-env": "^7.16.8",
     "@babel/preset-react": "^7.16.7",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.4",

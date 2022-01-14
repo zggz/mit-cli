@@ -27,9 +27,7 @@ const prodWebpackConfig = merge(webpackConfig, {
   output: {
     path: config.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
-    chunkFilename: utils.assetsPath('js/[id].[chunkhash].js'),
-    pathinfo: false,
-    clean: true
+    chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
   optimization: {
     splitChunks: {

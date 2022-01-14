@@ -1,6 +1,7 @@
 /* eslint-disable import/first */
 process.env.BABEL_ENV = 'development'
 process.env.NODE_ENV = 'development'
+process.env.GENERATE_SOURCEMAP = 'true'
 
 import openBrowser from 'react-dev-utils/openBrowser.js'
 import WebpackDevServer from 'webpack-dev-server'

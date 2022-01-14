@@ -12,30 +12,25 @@ import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin'
 
 import webpackConfig from './webpack.config.js'
 import config from '../config/index.js'
-import * as utils from './utils.js'
+// import * as utils from './utils.js'
 
 const { green } = pico
 
-const sockHost = process.env.WDS_SOCKET_HOST
-const sockPath = process.env.WDS_SOCKET_PATH // default: '/ws'
-const sockPort = process.env.WDS_SOCKET_PORT
+// const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false'
 
 const devWebpackConfig = merge(webpackConfig, {
   mode: 'development',
   devtool: 'cheap-module-source-map',
-  module: {
-    rules: utils.styleLoaders({ sourceMap: true, usePostCSS: true })
-  },
+  // module: {
+  //   rules: [{
+  //     oneOf: [
+  //       ...utils.styleLoaders({ sourceMap: shouldUseSourceMap, usePostCSS: true })
+  //     ]
+  //   }]
+
+  // },
   devServer: {
     client: {
-      webSocketURL: {
-        // Enable custom sockjs pathname for websocket connection to hot reloading server.
-        // Enable custom sockjs hostname, pathname and port for websocket connection
-        // to hot reloading server.
-        hostname: sockHost,
-        pathname: sockPath,
-        port: sockPort
-      },
       overlay: {
         errors: true,
         warnings: false
@@ -54,17 +49,17 @@ const devWebpackConfig = merge(webpackConfig, {
       'Access-Control-Allow-Headers': '*'
     },
     // Enable gzip compression of generated files.
-    host: config.host,
+    host: config.host || 'localhost',
     port: config.port,
     // open: config.autoOpenBrowser,
-    proxy: config.proxyTable || {}
-    // onListening: function (devServer) {
-    //   if (!devServer) {
-    //     throw new Error('webpack-dev-server is not defined')
-    //   }
-    //   const port = devServer.server.address().port
-    //   console.log('Listening on port:', port)
-    // }
+    proxy: config.proxyTable || {},
+    onListening: function (devServer) {
+      if (!devServer) {
+        throw new Error('webpack-dev-server is not defined')
+      }
+      const port = devServer.server.address().port
+      console.log('Listening on port:', port)
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
