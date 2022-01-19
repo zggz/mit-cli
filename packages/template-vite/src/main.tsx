@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom'
 import '@/index.css'
 import App from '@/App'
 import 'virtual:svg-icons-register'
-console.log(import.meta.env, window.__APP_VERSION__)
+import { BrowserRouter } from 'react-router-dom'
 ReactDOM.render(
     <React.StrictMode>
+        <BrowserRouter>
         <App />
+        </BrowserRouter>
+
     </React.StrictMode>,
     document.getElementById('root')
 )

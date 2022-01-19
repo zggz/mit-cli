@@ -4,6 +4,7 @@ import { resolve } from 'path'
 import visualizer from 'rollup-plugin-visualizer'
 import checker from 'vite-plugin-checker'
 import viteSvgIcons from 'vite-plugin-svg-icons'
+import reactRefresh from '@vitejs/plugin-react-refresh'
 
 export default defineConfig(async (configEnv) => {
   console.log(configEnv)
@@ -15,7 +16,7 @@ export default defineConfig(async (configEnv) => {
     },
     publicDir: './static',
     envDir: 'env',
-    plugins: [react(), visualizer({
+    plugins: [react(),reactRefresh(), visualizer({
       filename: './node_modules/.cache/visualizer/stats.html',
       open: true,
       gzipSize: true,
