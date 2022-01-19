@@ -1,0 +1,168 @@
+
+@function transform-size($size) {
+  @return #{$size}px;
+}
+
+// ---------------- color --------------------
+/// 对应`white`字体颜色（字体颜色推荐使用`get-font-color`函数去获取、其他颜色推荐使用`get-base-color`函数去获取）
+/// @group color
+/// @type Color
+$mall-color-white: #fff !default;
+/// 对应`black`字体颜色（字体颜色推荐使用`get-font-color`函数去获取、其他颜色推荐使用`get-base-color`函数去获取）
+/// @group color
+/// @type Color
+$mall-color-black: #000 !default;
+/// 对应`brand`字体颜色（字体颜色推荐使用`get-font-color`函数去获取、其他颜色推荐使用`get-base-color`函数去获取）
+/// @group color
+/// @type Color
+$mall-color-brand: #ff6900 !default;
+/// 对应`brand-dark`字体颜色（字体颜色推荐使用`get-font-color`函数去获取、其他颜色推荐使用`get-base-color`函数去获取）
+/// @group color
+/// @type Color
+$mall-color-brand-dark: #d95300 !default;
+/// 对应`primary`字体颜色（字体颜色推荐使用`get-font-color`函数去获取、其他颜色推荐使用`get-base-color`函数去获取）
+/// @group color
+/// @type Color
+$mall-color-primary: #191919 !default;
+
+/// 对应`secondary`字体颜色（我们推荐使用`get-font-color`函数去获取）
+/// @group color
+/// @type Color
+$mall-color-font-secondary: #666 !default;
+/// 对应`assist`字体颜色（我们推荐使用`get-font-color`函数去获取）
+/// @group color
+/// @type Color
+$mall-color-font-assist: #999 !default;
+/// 对应`disable`字体颜色（我们推荐使用`get-font-color`函数去获取）
+/// @group color
+/// @type Color
+$mall-color-font-disable: #ccc !default;
+
+/// 对应`secondary`基础颜色（我们推荐使用`get-base-color`函数去获取）
+/// @group color
+/// @type Color
+$mall-color-base-secondary: #333 !default;
+/// 对应`assist`基础颜色（我们推荐使用`get-base-color`函数去获取）
+/// @group color
+/// @type Color
+$mall-color-base-assist: #d9d9d9 !default;
+/// 对应`disable`基础颜色（我们推荐使用`get-base-color`函数去获取）
+/// @group color
+/// @type Color
+$mall-color-base-disable: #f5f5f5 !default;
+/// 对应`interact-darker`基础颜色（我们推荐使用`get-base-color`函数去获取）
+/// @group color
+/// @type Color
+$mall-color-base-interact-darker: #cdcdcd !default;
+/// 对应`interact`基础颜色（我们推荐使用`get-base-color`函数去获取）
+/// @group color
+/// @type Color
+$mall-color-base-interact: #e5e5e5 !default;
+/// 对应`gray-lighter`基础颜色（我们推荐使用`get-base-color`函数去获取）
+/// @group color
+/// @type Color
+$mall-color-base-gray-lighter: #fafafa !default;
+/// 对应`grayLighter`基础颜色（我们推荐使用`get-base-color`函数去获取）
+/// @group color
+/// @type Color
+$mall-color-base-gold-light: #ffdfb8 !default;
+
+/// 对应`error`状态颜色（我们推荐使用`get-status-color`函数去获取）
+/// @group color
+/// @type Color
+$mall-color-error: #f54a45 !default;
+/// 对应`error`状态,**浅色**颜色（我们推荐使用`get-status-color`函数去获取）
+/// @group color
+/// @type Color
+$mall-color-error-light: #fde2e2 !default;
+/// 对应`warn`状态颜色（我们推荐使用`get-status-color`函数去获取）
+/// @group color
+/// @type Color
+$mall-color-warn: #fa9e00 !default;
+/// 对应`warn`状态,**浅色**颜色（我们推荐使用`get-status-color`函数去获取）
+/// @group color
+/// @type Color
+$mall-color-warn-light: #faf1d1 !default;
+/// 对应`success`状态颜色（我们推荐使用`get-status-color`函数去获取）
+/// @group color
+/// @type Color
+$mall-color-success: #34c724 !default;
+/// 对应`success`状态,**浅色**颜色（我们推荐使用`get-status-color`函数去获取）
+/// @group color
+/// @type Color
+$mall-color-success-light: #d9f5d6 !default;
+
+// ------------------ color -----------------------------------
+
+// ------------------ font -------------------
+/// 对应`super-headline`特大标题字体大小（我们推荐使用`get-font-size`函数去获取）
+/// @group font
+/// @type px
+$mall-font-size-super-headline: 32px !default;
+/// 对应`first-headline`大标题字体大小（我们推荐使用`get-font-size`函数去获取）
+/// @group font
+/// @type px
+$mall-font-size-first-headline: 30px !default;
+/// 对应`second-headline`次标题字体大小（我们推荐使用`get-font-size`函数去获取）
+/// @group font
+/// @type px
+$mall-font-size-second-headline: 24px !default;
+/// 对应`third-headline`正文字体大小（我们推荐使用`get-font-size`函数去获取）
+/// @group font
+/// @type px
+$mall-font-size-third-headline: 20px !default;
+/// 对应`fourth-headline`正文辅助字体大小（我们推荐使用`get-font-size`函数去获取）
+/// @group font
+/// @type px
+$mall-font-size-fourth-headline: 18px !default;
+/// 对应`small-headline`注释字体大小（我们推荐使用`get-font-size`函数去获取）
+/// @group font
+/// @type px
+$mall-font-size-small-headline: 16px !default;
+/// 对应`comment`二级注释字体大小（我们推荐使用`get-font-size`函数去获取）
+/// @group font
+/// @type px
+$mall-font-size-comment: 14px !default;
+/// 对应`text-aid`二级注释字体大小（我们推荐使用`get-font-size`函数去获取）
+/// @group font
+/// @type px
+$mall-font-size-text-aid: 12px !default;
+// ------------------ font -------------------
+
+// ------------------- animation ----------------------
+/// 快速动画时间（我们推荐使用`get-animation-time`函数去获取）
+/// @group animation
+/// @type ms
+$mall-animation-time-quick: 150ms !default;
+/// 正常动画时间（我们推荐使用`get-animation-time`函数去获取）
+/// @group animation
+/// @type ms
+$mall-animation-time-normal: 300ms !default;
+/// 慢速动画时间（我们推荐使用`get-animation-time`函数去获取）
+/// @group animation
+/// @type ms
+$mall-animation-time-slow: 400ms !default;
+// ------------------ animation -------------------------------
+
+// ------------------ z-index -------------------
+/// 对应`最高`层级（我们推荐使用`get-z-index('super')`函数去获取）
+/// @group layer
+/// @type number
+$mall-z-index-super: 200 !default;
+/// 对应`次高`层级（我们推荐使用`get-z-index('interact')`函数去获取）
+/// @group layer
+/// @type number
+$mall-z-index-interact: 100 !default;
+/// 对应`默认`层级（我们推荐使用`get-z-index('default')`函数去获取）
+/// @group layer
+/// @type number
+$mall-z-index-default: 0 !default;
+/// 对应`背景层`层级（我们推荐使用`get-z-index('background')`函数去获取）
+/// @group layer
+/// @type number
+$mall-z-index-background: -100 !default;
+/// 对应`最低`层级（我们推荐使用`get-z-index('lowest')`函数去获取）
+/// @group layer
+/// @type number
+$mall-z-index-lowest: -200 !default;
+// ------------------ z-index -------------------
