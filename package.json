@@ -7,6 +7,7 @@
     "sum": "./lib/index.js"
   },
   "scripts": {
+    "dev": "cd packages/create-app &&  node index.js",
     "build": "cd packages/create-app &&  node scripts/build.js",
     "start": "cd packages/create-app && node scripts/start.js",
     "debug": "cd packages/create-app && node $NODE_DEBUG_OPTION scripts/start.js",
